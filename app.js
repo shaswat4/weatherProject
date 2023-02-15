@@ -28,30 +28,39 @@ app.post("/", function (req, res) {
       
 
       response.on("data", function (data) {
-        //console.log(data);
-        const weatherData = JSON.parse(data);
-        //console.log(weatherData);
-        const description = weatherData.weather[0].description;
-        const temp = weatherData.main.temp;
-        const code = weatherData.weather[0].icon;
-        const id = weatherData.weather[0].id;
 
-        // console.log(description);
-        // console.log(temp);
-        // console.log(code);
-        // console.log(id);
+        try {
+             //console.log(data);
+            const weatherData = JSON.parse(data);
+            //console.log(weatherData);
+            const description = weatherData.weather[0].description;
+            const temp = weatherData.main.temp;
+            const code = weatherData.weather[0].icon;
+            const id = weatherData.weather[0].id;
 
-        res.write("<p>the weather is currently " + description + "</p>");
-        res.write(
-          "<h2>the temprature in " +
-            city +
-            " is currenly " +
-            temp +
-            " degrees celcius</h2>"
-        );
-        res.write(
-          "<img src='http://openweathermap.org/img/wn/" + code + "@2x.png' >"
-        );
+            // console.log(description);
+            // console.log(temp);
+            // console.log(code);
+            // console.log(id);
+
+            res.write("<p>the weather is currently " + description + "</p>");
+            res.write(
+            "<h2>the temprature in " +
+                city +
+                " is currenly " +
+                temp +
+                " degrees celcius</h2>"
+            );
+            res.write(
+            "<img src='http://openweathermap.org/img/wn/" + code + "@2x.png' >"
+            );
+        } 
+        catch (error) {
+            console.error(error);
+            res.write("<h1>an error occured. please try again</h1>");    
+        }
+
+       
 
         res.send();
       });
