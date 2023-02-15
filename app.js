@@ -15,16 +15,26 @@ app.get("/", function (req, res) {
             //console.log(weatherData);
             const description =  weatherData.weather[0].description;
             const temp = weatherData.main.temp ;
+            const code =  weatherData.weather[0].icon ;
+            const id = weatherData.weather[0].id ;
 
 
             console.log(description);
             console.log(temp);
+            console.log(code);
+            console.log(id);
+            
+            res.write("<p>the weather is currently " + description + "</p>");
+            res.write("<h2>the temprature in Delhi is currenly " + temp +" degrees celcius</h2>");
+            res.write( "<img src='http://openweathermap.org/img/wn/" +code+ "@2x.png' >");
+
+            res.send();
 
 
         });
     }); 
     
-  res.send("success");
+  //res.send("success");
 });
 
 app.listen(3000, () => {
